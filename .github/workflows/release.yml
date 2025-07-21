@@ -1,0 +1,29 @@
+name: Zip and Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger only on version tags like v1.0.0
+
+jobs:
+  zip-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up zip filename
+        run: echo "ZIP_NAME=${{ github.event.repository.name }}-${{ github.ref_name }}.zip" >> $GITHUB_ENV
+
+      - name: Zip the repository
+        run: zip -r $ZIP_NAME . -x '*.git*'
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          files: ${{ env.ZIP_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
