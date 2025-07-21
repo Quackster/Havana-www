@@ -18,7 +18,7 @@ This repository mirrors the behavior of the traditional gamedata or web build ho
 
 You can download the latest gamedata package from the [Releases](https://github.com/Quackster/Havana-www/releases) page.
 
-Each release contains a .zip archive of the current version, ready to be hosted on your own web server.
+Each release contains a .tar.xz archive of the current version, ready to be hosted on your own web server.
 
 ## Contributing
 
