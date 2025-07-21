@@ -1,4 +1,4 @@
-name: Zip and Release
+name: Extreme Compress and Release
 
 on:
   push:
@@ -6,18 +6,18 @@ on:
       - 'v*'
 
 jobs:
-  zip-and-release:
+  compress-and-release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up zip filename
-        run: echo "ZIP_NAME=${{ github.event.repository.name }}-${{ github.ref_name }}.zip" >> $GITHUB_ENV
-
-      - name: Zip the repository
-        run: zip -r $ZIP_NAME . -x '*.git*'
+      - name: Tar and compress with xz
+        run: |
+          TAR_NAME=${{ github.event.repository.name }}-${{ github.ref_name }}.tar.xz
+          echo "ZIP_NAME=$TAR_NAME" >> $GITHUB_ENV
+          tar --exclude-vcs -cJf "$TAR_NAME" .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
