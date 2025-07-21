@@ -19,7 +19,12 @@ jobs:
           echo "ZIP_NAME=$TAR_NAME" >> $GITHUB_ENV
 
           mkdir staging
-          rsync -a --exclude='.git' --exclude='staging' ./ staging/
+          rsync -a \
+            --exclude='.git' \
+            --exclude='staging' \
+            --exclude='*.htm' \
+            --exclude='*.html' \
+            ./ staging/
 
           tar -cJf "$TAR_NAME" -C staging .
 
