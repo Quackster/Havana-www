@@ -1,4 +1,4 @@
-name: Extreme Compress and Release
+name: Compress and Release
 
 on:
   push:
@@ -13,11 +13,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Tar and compress with xz
+      - name: Tar and compress with xz (safe method)
         run: |
           TAR_NAME=${{ github.event.repository.name }}-${{ github.ref_name }}.tar.xz
           echo "ZIP_NAME=$TAR_NAME" >> $GITHUB_ENV
-          tar --exclude-vcs -cJf "$TAR_NAME" .
+
+          mkdir staging
+          rsync -a --exclude='.git' ./ staging/
+
+          tar -cJf "$TAR_NAME" -C staging .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
