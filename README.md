@@ -1,5 +1,5 @@
 ## Havana-www
-This repository contains the frontend web assets (gamedata) for Havana, private Habbo Hotel server software.
+This repository contains the frontend web assets (gamedata) for [Havana](https://github.com/Quackster/Havana/), private Habbo Hotel server software.
 
 These files are intended to be served to clients connecting to a Havana server.
 
