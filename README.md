@@ -14,6 +14,12 @@ Havana-www provides:
 
 This repository mirrors the behavior of the traditional gamedata or web build hosting used by Habbo Hotel, and is essential for running a fully functional Havana server environment.
 
+## Download
+
+You can download the latest gamedata package from the [Releases](https://github.com/Quackster/Havana-www/releases) page.
+
+Each release contains a .zip archive of the current version, ready to be hosted on your own web server.
+
 ## Contributing
 
 This repository is mostly static and updated to match the expected format for Havana. Pull requests to fix or update gamedata files (e.g. from newer releases or to improve compatibility) are welcome.
