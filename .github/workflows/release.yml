@@ -13,10 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Tar and compress with xz (safe method)
+      - name: Zip the repository (safe method)
         run: |
-          TAR_NAME=${{ github.event.repository.name }}-${{ github.ref_name }}.tar.xz
-          echo "ZIP_NAME=$TAR_NAME" >> $GITHUB_ENV
+          ZIP_NAME=${{ github.event.repository.name }}-${{ github.ref_name }}.zip
+          echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
 
           mkdir staging
           rsync -a \
@@ -26,7 +26,8 @@ jobs:
             --exclude='*.html' \
             ./ staging/
 
-          tar -cJf "$TAR_NAME" -C staging .
+          cd staging
+          zip -r "../$ZIP_NAME" .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
